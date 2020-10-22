@@ -14,18 +14,13 @@ import tr.com.ogedik.commons.expection.ErrorException;
 
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Service
 public class GroupServiceImpl implements GroupService {
 
-  @Autowired
-  private GroupPersistenceManager persistenceManager;
-  @Autowired
-  private GroupValidationFacade validationFacade;
-  @Autowired
-  private GroupMapper groupMapper;
+  @Autowired private GroupPersistenceManager persistenceManager;
+  @Autowired private GroupValidationFacade validationFacade;
+  @Autowired private GroupMapper groupMapper;
 
   @Override
   public boolean isExist(String groupName) {
@@ -61,8 +56,8 @@ public class GroupServiceImpl implements GroupService {
   @Override
   public void delete(Long id) {
     if (BooleanUtils.isFalse(persistenceManager.existsByResourceId(id))) {
-      throw new ErrorException(AuthenticationErrorType.GROUP_NOT_FOUND, "Requested group id is " + id);
-
+      throw new ErrorException(
+          AuthenticationErrorType.GROUP_NOT_FOUND, "Requested group id is " + id);
     }
     persistenceManager.deleteByResourceId(id);
   }

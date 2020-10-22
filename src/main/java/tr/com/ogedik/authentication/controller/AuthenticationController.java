@@ -14,32 +14,29 @@ import tr.com.ogedik.commons.rest.AbstractController;
 import tr.com.ogedik.commons.rest.request.model.AuthenticationRequest;
 import tr.com.ogedik.commons.rest.response.AbstractResponse;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @RestController
 public class AuthenticationController extends AbstractController {
 
-    private static final Logger logger = LogManager.getLogger(AuthenticationController.class);
+  private static final Logger logger = LogManager.getLogger(AuthenticationController.class);
 
-    @Autowired
-    private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
-    @PostMapping(Services.Path.AUTHENTICATE)
-    public AbstractResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        logger.info("The request has been received to create authentication token.");
-        return AbstractResponse.build(authenticationService.authenticate(authenticationRequest));
-    }
+  @PostMapping(Services.Path.AUTHENTICATE)
+  public AbstractResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+    logger.info("The request has been received to create authentication token.");
+    return AbstractResponse.build(authenticationService.authenticate(authenticationRequest));
+  }
 
-    @PostMapping(Services.Path.VALIDATE)
-    public AbstractResponse validate(@RequestBody String token) {
-        logger.info("The request has been received to create authentication token.");
-        return AbstractResponse.build(authenticationService.validateToken(token));
-    }
+  @PostMapping(Services.Path.VALIDATE)
+  public AbstractResponse validate(@RequestBody String token) {
+    logger.info("The request has been received to create authentication token.");
+    return AbstractResponse.build(authenticationService.validateToken(token));
+  }
 
-    @GetMapping(Services.Path.PERMISSIONS)
-    public AbstractResponse getPermissions() {
-        logger.info("The request has been received to retrieve list of available permissions.");
-        return AbstractResponse.build(Permission.class.getEnumConstants());
-    }
+  @GetMapping(Services.Path.PERMISSIONS)
+  public AbstractResponse getPermissions() {
+    logger.info("The request has been received to retrieve list of available permissions.");
+    return AbstractResponse.build(Permission.class.getEnumConstants());
+  }
 }

@@ -6,31 +6,29 @@ import tr.com.ogedik.authentication.model.AuthenticationUser;
 import tr.com.ogedik.commons.validator.MandatoryFieldValidator;
 import tr.com.ogedik.commons.validator.ValidationFacade;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Component
 public class UserValidationFacade extends ValidationFacade<AuthenticationUser> {
 
-  @Autowired
-  private UserCreationValidator userCreationValidator;
-  @Autowired
-  private UserUpdateValidator userUpdateValidator;
-  @Autowired
-  private JiraUserValidator jiraUserValidator;
-  @Autowired
-  private UsernameValidator usernameValidator;
-  @Autowired
-  private UserPasswordValidator userPasswordValidator;
+  @Autowired private UserCreationValidator userCreationValidator;
+  @Autowired private UserUpdateValidator userUpdateValidator;
+  @Autowired private JiraUserValidator jiraUserValidator;
+  @Autowired private UsernameValidator usernameValidator;
+  @Autowired private UserPasswordValidator userPasswordValidator;
 
   /**
    * Validates {@link UserCreationValidator}
-   * 
+   *
    * @param authenticationUser the object of {@link AuthenticationUser}
    */
   public void validateCreate(AuthenticationUser authenticationUser) {
-    super.validate(authenticationUser, MandatoryFieldValidator.getInstance(), userCreationValidator,
-            jiraUserValidator, usernameValidator, userPasswordValidator);
+    super.validate(
+        authenticationUser,
+        MandatoryFieldValidator.getInstance(),
+        userCreationValidator,
+        jiraUserValidator,
+        usernameValidator,
+        userPasswordValidator);
   }
 
   /**
@@ -39,6 +37,10 @@ public class UserValidationFacade extends ValidationFacade<AuthenticationUser> {
    * @param authenticationUser the object of {@link AuthenticationUser}
    */
   public void validateUpdate(AuthenticationUser authenticationUser) {
-    super.validate(authenticationUser, MandatoryFieldValidator.getInstance(), userUpdateValidator, usernameValidator);
+    super.validate(
+        authenticationUser,
+        MandatoryFieldValidator.getInstance(),
+        userUpdateValidator,
+        usernameValidator);
   }
 }

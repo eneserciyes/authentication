@@ -14,15 +14,12 @@ import tr.com.ogedik.commons.expection.ErrorException;
 
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Service
-@CacheConfig(cacheNames = { "authenticationCache" })
+@CacheConfig(cacheNames = {"authenticationCache"})
 public class UserPersistenceManager {
 
-  @Autowired
-  private UserRepository repository;
+  @Autowired private UserRepository repository;
 
   public boolean existsByUsername(String username) {
     return repository.existsByUsername(username);

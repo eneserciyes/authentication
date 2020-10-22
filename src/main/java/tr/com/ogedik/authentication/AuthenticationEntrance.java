@@ -11,17 +11,21 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * This class will extend Spring's AuthenticationEntryPoint class and override its method to commence.
- * It rejects every unauthenticated request and sends error code 401.
- * 
+ * This class will extend Spring's AuthenticationEntryPoint class and override its method to
+ * commence. It rejects every unauthenticated request and sends error code 401.
+ *
  * @author orkun.gedik
  */
 @Component
 public class AuthenticationEntrance implements AuthenticationEntryPoint, Serializable {
 
   @Override
-  public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-      AuthenticationException e) throws IOException {
-    httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, AuthenticationErrorType.UNAUTHORIZED.getTitle());
+  public void commence(
+      HttpServletRequest httpServletRequest,
+      HttpServletResponse httpServletResponse,
+      AuthenticationException e)
+      throws IOException {
+    httpServletResponse.sendError(
+        HttpServletResponse.SC_UNAUTHORIZED, AuthenticationErrorType.UNAUTHORIZED.getTitle());
   }
 }

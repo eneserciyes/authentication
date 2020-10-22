@@ -3,9 +3,7 @@ package tr.com.ogedik.authentication.service;
 import tr.com.ogedik.authentication.model.AuthenticationDetails;
 import tr.com.ogedik.commons.rest.request.model.AuthenticationRequest;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 public interface AuthenticationService {
 
   /**

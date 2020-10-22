@@ -12,26 +12,28 @@ import tr.com.ogedik.commons.util.ListUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @UtilityClass
 public class AuthenticationUtil {
   private static final Logger logger = LogManager.getLogger(AuthenticationUtil.class);
 
-    /**
-     * Returns an list of {@link GrantedAuthority} by given groups
-     *
-     * @param groups {@link List}<{@link tr.com.ogedik.authentication.model.AuthenticationGroup}>
-     * @return {@link List}<{@link UserGrantedAuthority}>
-     */
+  /**
+   * Returns an list of {@link GrantedAuthority} by given groups
+   *
+   * @param groups {@link List}<{@link tr.com.ogedik.authentication.model.AuthenticationGroup}>
+   * @return {@link List}<{@link UserGrantedAuthority}>
+   */
   public static List<UserGrantedAuthority> getAuthorities(List<AuthenticationGroup> groups) {
     try {
-      List<Permission> permissions = (List<Permission>) ListUtils.mergeNested(groups, "permissions");
+      List<Permission> permissions =
+          (List<Permission>) ListUtils.mergeNested(groups, "permissions");
       logger.info("Retrieved permission list: {}", permissions);
-      return permissions.stream().map(permission -> new UserGrantedAuthority(permission)).collect(Collectors.toList());
+      return permissions.stream()
+          .map(permission -> new UserGrantedAuthority(permission))
+          .collect(Collectors.toList());
     } catch (IllegalAccessException e) {
-      logger.warn("Cannot parse user permissions. Authentication will be provided without authorities");
+      logger.warn(
+          "Cannot parse user permissions. Authentication will be provided without authorities");
       return null;
     }
   }

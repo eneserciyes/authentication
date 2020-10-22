@@ -5,9 +5,7 @@ import tr.com.ogedik.authentication.entity.GroupEntity;
 import tr.com.ogedik.authentication.model.AuthenticationGroup;
 import tr.com.ogedik.commons.mapper.AbstractBoMapper;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Mapper(componentModel = "spring")
 public abstract class GroupMapper extends AbstractBoMapper<AuthenticationGroup, GroupEntity> {
 
@@ -28,5 +26,4 @@ public abstract class GroupMapper extends AbstractBoMapper<AuthenticationGroup, 
    */
   @Override
   public abstract GroupEntity convert(AuthenticationGroup group);
-
 }

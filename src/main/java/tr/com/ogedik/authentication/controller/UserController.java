@@ -13,58 +13,55 @@ import tr.com.ogedik.commons.rest.AbstractController;
 import tr.com.ogedik.commons.rest.response.AbstractResponse;
 import tr.com.ogedik.commons.util.MetaUtils;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Controller
 @RequestMapping(Services.Path.USERS)
 public class UserController extends AbstractController {
 
-    private static final Logger logger = LogManager.getLogger(UserController.class);
+  private static final Logger logger = LogManager.getLogger(UserController.class);
 
-    @Autowired
-    private UserService userService;
+  @Autowired private UserService userService;
 
-    @GetMapping
-    public AbstractResponse getUsers() {
-        logger.info("The request has been received to return all users.");
+  @GetMapping
+  public AbstractResponse getUsers() {
+    logger.info("The request has been received to return all users.");
 
-        return AbstractResponse.build(userService.getAllUsers());
-    }
+    return AbstractResponse.build(userService.getAllUsers());
+  }
 
-    @GetMapping(Services.Path.IDENTIFIER)
-    public AbstractResponse getUser(@PathVariable String identifier) {
-        logger.info("The request has been received to return an user with id {}.", identifier);
+  @GetMapping(Services.Path.IDENTIFIER)
+  public AbstractResponse getUser(@PathVariable String identifier) {
+    logger.info("The request has been received to return an user with id {}.", identifier);
 
-        return AbstractResponse.build(userService.getUserByUsername(identifier));
-    }
+    return AbstractResponse.build(userService.getUserByUsername(identifier));
+  }
 
-    @PostMapping
-    public AbstractResponse createUser(
-            @RequestBody AuthenticationUser authenticationUser,
-            @RequestHeader(value = Headers.AUTH_USER,
-                    defaultValue = Headers.ANONYMOUS) String authenticatedUsername) {
-        logger.info("The request has been received to create an user.");
-        MetaUtils.fillMeta(authenticationUser, authenticatedUsername);
+  @PostMapping
+  public AbstractResponse createUser(
+      @RequestBody AuthenticationUser authenticationUser,
+      @RequestHeader(value = Headers.AUTH_USER, defaultValue = Headers.ANONYMOUS)
+          String authenticatedUsername) {
+    logger.info("The request has been received to create an user.");
+    MetaUtils.fillMeta(authenticationUser, authenticatedUsername);
 
-        return AbstractResponse.build(userService.create(authenticationUser));
-    }
+    return AbstractResponse.build(userService.create(authenticationUser));
+  }
 
-    @PutMapping
-    public AbstractResponse updateUser(@RequestBody AuthenticationUser authenticationUser,
-                                       @RequestHeader(Headers.AUTH_USER) String authenticatedUsername) {
-        logger.info("The request has been received to update an user.");
-        MetaUtils.fillMeta(authenticationUser, authenticatedUsername);
+  @PutMapping
+  public AbstractResponse updateUser(
+      @RequestBody AuthenticationUser authenticationUser,
+      @RequestHeader(Headers.AUTH_USER) String authenticatedUsername) {
+    logger.info("The request has been received to update an user.");
+    MetaUtils.fillMeta(authenticationUser, authenticatedUsername);
 
-        return AbstractResponse.build(userService.update(authenticationUser));
-    }
+    return AbstractResponse.build(userService.update(authenticationUser));
+  }
 
-    @DeleteMapping(Services.Path.IDENTIFIER)
-    public AbstractResponse deleteUser(@PathVariable String identifier) {
-        logger.info("The request has been received to delete an user with id {}.", identifier);
-        userService.delete(identifier);
+  @DeleteMapping(Services.Path.IDENTIFIER)
+  public AbstractResponse deleteUser(@PathVariable String identifier) {
+    logger.info("The request has been received to delete an user with id {}.", identifier);
+    userService.delete(identifier);
 
-        return AbstractResponse.OK();
-    }
-
+    return AbstractResponse.OK();
+  }
 }

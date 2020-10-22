@@ -4,9 +4,7 @@ import org.springframework.stereotype.Component;
 import tr.com.ogedik.authentication.model.AuthenticationUser;
 import tr.com.ogedik.commons.validator.Validator;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Component
 public class UserPasswordValidator<T extends AuthenticationUser> implements Validator<T> {
 

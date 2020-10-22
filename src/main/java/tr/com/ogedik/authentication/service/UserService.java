@@ -5,9 +5,7 @@ import tr.com.ogedik.authentication.model.AuthenticationUser;
 
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 public interface UserService extends UserDetailsService {
 
   /**
@@ -55,5 +53,4 @@ public interface UserService extends UserDetailsService {
    * @param username {@link String} value of username
    */
   void delete(String username);
-
 }

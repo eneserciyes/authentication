@@ -10,9 +10,7 @@ import tr.com.ogedik.commons.model.AbstractBo;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,19 +18,16 @@ public class AuthenticationUser extends AbstractBo {
 
   private Long resourceId;
 
-  @NotNull
-  private String username;
+  @NotNull private String username;
 
-  @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
   private String displayName;
 
-  @NotNull
-  private String team;
+  @NotNull private String team;
 
-  @NotNull
-  private String email;
+  @NotNull private String email;
 
   private String avatarUrl;
 
@@ -41,5 +36,4 @@ public class AuthenticationUser extends AbstractBo {
   private LocalDateTime enrolmentDate;
 
   private LocalDateTime lastLoginDate;
-
 }

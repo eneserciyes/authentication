@@ -11,9 +11,7 @@ import tr.com.ogedik.commons.entity.ResourceEntity;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Entity
 @Table(name = AuthenticationConstants.Entity.APPLICATION_GROUP)
 @AllArgsConstructor

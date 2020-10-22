@@ -19,46 +19,42 @@ import tr.com.ogedik.commons.expection.ErrorException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Service
 @Primary
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
-    private static final Logger logger = LogManager.getLogger(AuthenticationController.class);
+  private static final Logger logger = LogManager.getLogger(AuthenticationController.class);
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+  @Autowired private UserService userService;
+  @Autowired private PasswordEncoder passwordEncoder;
 
-    @Override
-    public AuthenticationDetails authenticate(Authentication authentication) throws ErrorException {
-        AuthenticationUser user = userService.getUserByUsername(authentication.getPrincipal().toString());
+  @Override
+  public AuthenticationDetails authenticate(Authentication authentication) throws ErrorException {
+    AuthenticationUser user =
+        userService.getUserByUsername(authentication.getPrincipal().toString());
 
-        if (Objects.isNull(user)) {
-            throw new ErrorException(AuthenticationErrorType.USER_NOT_FOUND,
-                    "User not found for : " + authentication.getPrincipal().toString());
-        }
-        if (!passwordEncoder.matches(authentication.getCredentials().toString(), user.getPassword())) {
-            throw new ErrorException(AuthenticationErrorType.INVALID_CREDENTIALS);
-        }
-
-        logger.info("Username and password validations are OK. Authentication is being initialized.");
-
-        // Update last login date on the moment that user has been authenticated
-        user.setLastLoginDate(LocalDateTime.now());
-        userService.update(user);
-
-
-        return AuthenticationDetails.builder()
-                .authorities(AuthenticationUtil.getAuthorities(user.getGroups()))
-                .principal(user.getUsername())
-                .credentials(user.getPassword())
-                .details(user)
-                .isAuthenticated(true)
-                .build();
+    if (Objects.isNull(user)) {
+      throw new ErrorException(
+          AuthenticationErrorType.USER_NOT_FOUND,
+          "User not found for : " + authentication.getPrincipal().toString());
+    }
+    if (!passwordEncoder.matches(authentication.getCredentials().toString(), user.getPassword())) {
+      throw new ErrorException(AuthenticationErrorType.INVALID_CREDENTIALS);
     }
 
+    logger.info("Username and password validations are OK. Authentication is being initialized.");
+
+    // Update last login date on the moment that user has been authenticated
+    user.setLastLoginDate(LocalDateTime.now());
+    userService.update(user);
+
+    return AuthenticationDetails.builder()
+        .authorities(AuthenticationUtil.getAuthorities(user.getGroups()))
+        .principal(user.getUsername())
+        .credentials(user.getPassword())
+        .details(user)
+        .isAuthenticated(true)
+        .build();
+  }
 }

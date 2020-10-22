@@ -6,9 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import tr.com.ogedik.authentication.constants.Permission;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Getter
 @Setter
 @AllArgsConstructor

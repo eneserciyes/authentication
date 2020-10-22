@@ -7,14 +7,11 @@ import tr.com.ogedik.authentication.persistance.repository.GroupRepository;
 
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Service
 public class GroupPersistenceManager {
 
-  @Autowired
-  private GroupRepository repository;
+  @Autowired private GroupRepository repository;
 
   public List<GroupEntity> findAll() {
     return repository.findAll();
@@ -36,7 +33,7 @@ public class GroupPersistenceManager {
     return repository.existsByResourceId(id);
   }
 
-    public boolean existByGroupName(String groupName) {
+  public boolean existByGroupName(String groupName) {
     return repository.existsByName(groupName);
-    }
+  }
 }

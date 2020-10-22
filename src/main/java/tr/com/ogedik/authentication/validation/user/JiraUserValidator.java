@@ -12,28 +12,27 @@ import tr.com.ogedik.commons.rest.request.model.AuthenticationRequest;
 import tr.com.ogedik.commons.validator.Validator;
 import tr.com.ogedik.scrumier.proxy.clients.IntegrationProxy;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Component
 public class JiraUserValidator<T extends AuthenticationUser> implements Validator<T> {
 
-    private static final Logger logger = LogManager.getLogger(JiraUserValidator.class);
+  private static final Logger logger = LogManager.getLogger(JiraUserValidator.class);
 
-    @Autowired
-    private IntegrationProxy integrationProxy;
+  @Autowired private IntegrationProxy integrationProxy;
 
-    @Override
-    public void validate(T validationRequest) {
-        String username = validationRequest.getUsername();
-        String password = validationRequest.getPassword();
+  @Override
+  public void validate(T validationRequest) {
+    String username = validationRequest.getUsername();
+    String password = validationRequest.getPassword();
 
-        try {
-            integrationProxy.authenticateJira(AuthenticationRequest.builder().username(username).password(password).build());
-        } catch (HttpServerErrorException e) {
-            logger.warn("Username: {} cannot authenticated to Jira connected instance");
-            throw new ErrorException(AuthenticationErrorType.USER_NOT_FOUND,
-                    "User cannot be found in connect Jira instance. Please check your username and password.");
-        }
+    try {
+      integrationProxy.authenticateJira(
+          AuthenticationRequest.builder().username(username).password(password).build());
+    } catch (HttpServerErrorException e) {
+      logger.warn("Username: {} cannot authenticated to Jira connected instance");
+      throw new ErrorException(
+          AuthenticationErrorType.USER_NOT_FOUND,
+          "User cannot be found in connect Jira instance. Please check your username and password.");
     }
+  }
 }

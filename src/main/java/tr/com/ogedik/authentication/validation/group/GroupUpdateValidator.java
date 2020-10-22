@@ -8,19 +8,17 @@ import tr.com.ogedik.authentication.service.GroupService;
 import tr.com.ogedik.commons.expection.ErrorException;
 import tr.com.ogedik.commons.validator.Validator;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Component
 public class GroupUpdateValidator<T extends AuthenticationGroup> implements Validator<T> {
 
-    @Autowired
-    private GroupService groupService;
+  @Autowired private GroupService groupService;
 
-    @Override
-    public void validate(T validationRequest) {
-        if (!groupService.isExist(validationRequest.getName())) {
-            throw new ErrorException(AuthenticationErrorType.GROUP_NOT_FOUND, validationRequest.getName());
-        }
+  @Override
+  public void validate(T validationRequest) {
+    if (!groupService.isExist(validationRequest.getName())) {
+      throw new ErrorException(
+          AuthenticationErrorType.GROUP_NOT_FOUND, validationRequest.getName());
     }
+  }
 }

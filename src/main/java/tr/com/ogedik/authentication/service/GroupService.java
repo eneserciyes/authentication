@@ -4,9 +4,7 @@ import tr.com.ogedik.authentication.model.AuthenticationGroup;
 
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 public interface GroupService {
 
   boolean isExist(String groupName);

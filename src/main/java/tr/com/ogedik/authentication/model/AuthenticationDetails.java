@@ -9,23 +9,19 @@ import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Getter
 @Setter
 @Builder
 public class AuthenticationDetails implements Authentication {
 
-  @JsonIgnore
-  private String principal;
+  @JsonIgnore private String principal;
 
   private String token;
 
   private List<UserGrantedAuthority> authorities;
 
-  @JsonIgnore
-  private boolean isAuthenticated;
+  @JsonIgnore private boolean isAuthenticated;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String credentials;

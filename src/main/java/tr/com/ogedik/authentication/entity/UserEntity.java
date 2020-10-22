@@ -12,9 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * @author orkun.gedik
- */
+/** @author orkun.gedik */
 @Entity
 @Table(name = AuthenticationConstants.Entity.APPLICATION_USER)
 @AllArgsConstructor
@@ -36,7 +34,9 @@ public class UserEntity extends ResourceEntity {
   private String password;
 
   @Column(name = AuthenticationConstants.COLS.GROUPS)
-  @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+  @OneToMany(
+      fetch = FetchType.EAGER,
+      cascade = {CascadeType.ALL})
   private List<GroupEntity> groups;
 
   @Column(name = AuthenticationConstants.COLS.TEAM)
@@ -59,10 +59,12 @@ public class UserEntity extends ResourceEntity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserEntity that = (UserEntity)o;
+    UserEntity that = (UserEntity) o;
 
     return ObjectUtils.equals(that.getResourceId(), this.getResourceId())
-        && ObjectUtils.equals(that.username, this.username) && ObjectUtils.equals(that.password, this.password)
-        && ObjectUtils.equals(that.team, this.team) && ObjectUtils.equals(that.enrolmentDate, this.enrolmentDate);
+        && ObjectUtils.equals(that.username, this.username)
+        && ObjectUtils.equals(that.password, this.password)
+        && ObjectUtils.equals(that.team, this.team)
+        && ObjectUtils.equals(that.enrolmentDate, this.enrolmentDate);
   }
 }
