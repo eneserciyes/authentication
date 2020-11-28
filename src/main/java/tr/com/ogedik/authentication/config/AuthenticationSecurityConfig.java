@@ -74,6 +74,10 @@ public class AuthenticationSecurityConfig extends WebSecurityConfigurerAdapter {
             Services.Path.VALIDATE,
             Services.Path.USERS)
         .permitAll()
+        .and()
+        .authorizeRequests()
+        .antMatchers(HttpMethod.GET, Services.Path.USERS)
+        .permitAll()
         // all other requests need to be authenticated
         .anyRequest()
         .authenticated()
