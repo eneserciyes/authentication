@@ -50,7 +50,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     userService.update(user);
 
     return AuthenticationDetails.builder()
-        .authorities(AuthenticationUtil.getAuthorities(user.getPermissions()))
+        .authorities(AuthenticationUtil.getAuthorities(user.getGroups()))
         .principal(user.getUsername())
         .credentials(user.getPassword())
         .details(user)
