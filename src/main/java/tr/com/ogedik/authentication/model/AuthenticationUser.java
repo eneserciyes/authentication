@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tr.com.ogedik.authentication.constants.Permission;
 import tr.com.ogedik.commons.annotation.NotNull;
 import tr.com.ogedik.commons.model.AbstractBo;
 
@@ -31,7 +32,7 @@ public class AuthenticationUser extends AbstractBo {
 
   private String avatarUrl;
 
-  private List<AuthenticationGroup> groups;
+  private List<Permission> permissions;
 
   private LocalDateTime enrolmentDate;
 
