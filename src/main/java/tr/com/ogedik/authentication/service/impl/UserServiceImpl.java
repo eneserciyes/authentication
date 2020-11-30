@@ -21,8 +21,10 @@ import tr.com.ogedik.authentication.validation.user.UserValidationFacade;
 import tr.com.ogedik.commons.expection.ErrorException;
 import tr.com.ogedik.commons.model.JiraSearchUser;
 import tr.com.ogedik.commons.model.JiraUser;
+import tr.com.ogedik.commons.rest.request.model.EmailRequest;
 import tr.com.ogedik.commons.util.MetaUtils;
 import tr.com.ogedik.scrumier.proxy.clients.IntegrationProxy;
+import tr.com.ogedik.scrumier.proxy.clients.NotificationProxy;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService {
   @Autowired private UserValidationFacade validationFacade;
   @Autowired private UserMapper userMapper;
   @Autowired private IntegrationProxy integrationProxy;
+  @Autowired private NotificationProxy notificationProxy;
 
   @Override
   public List<AuthenticationUser> getAllUsers() {
@@ -66,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public AuthenticationUser create(AuthenticationUser user) {
-    //validationFacade.validateCreate(user);
+    //TODO: validate the creation of user
 
     JiraUser jiraUser = integrationProxy.getJiraUser(user.getUsername());
 
@@ -110,10 +113,18 @@ public class UserServiceImpl implements UserService {
 
     user.setUsername(jiraSearchUser.getName());
     String password = AuthenticationUtil.generateRandomPassword();
+
     logger.log(Level.INFO, "Password: " + password);
     user.setPassword(password);
     user.setEmail(jiraSearchUser.getEmailAddress());
-      return create(user);
+
+    EmailRequest request = new EmailRequest();
+    request.setTo(user.getEmail());
+    request.setSubject("Scrumier Registration");
+    request.setBody("Your username: " + user.getUsername() + "\nYour password: " + user.getPassword());
+
+    //boolean status = notificationProxy.sendMail(request);
+    return create(user);
   }
 
   @Override
