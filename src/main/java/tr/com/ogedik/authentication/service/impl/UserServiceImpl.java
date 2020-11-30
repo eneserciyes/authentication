@@ -108,8 +108,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public AuthenticationUser createFromJiraUser(
-      JiraSearchUser jiraSearchUser, String authenticatedUsername) {
+  public AuthenticationUser createFromJiraUser(JiraSearchUser jiraSearchUser, String authenticatedUsername) {
     AuthenticationUser user = new AuthenticationUser();
     MetaUtils.fillMeta(user, authenticatedUsername);
 

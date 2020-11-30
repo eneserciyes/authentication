@@ -37,6 +37,4 @@ public class AuthenticationUser extends AbstractBo {
   private LocalDateTime enrolmentDate;
 
   private LocalDateTime lastLoginDate;
-
-  @NotNull private String isAdmin;
 }

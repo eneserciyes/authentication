@@ -30,6 +30,5 @@ public class AuthenticationConstants {
     public static final String GROUPS = "groups";
     public static final String PERMISSIONS = "permissions";
     public static final String AVATAR_URL = "avatarUrl";
-    public static final String ADMIN = "admin";
   }
 }
