@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public AuthenticationUser create(AuthenticationUser user) {
+    // validationFacade.validateCreate(user);
     //TODO: validate the creation of user
 
     JiraUser jiraUser = integrationProxy.getJiraUser(user.getUsername());
@@ -107,7 +108,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public AuthenticationUser createFromJiraUser(JiraSearchUser jiraSearchUser, String authenticatedUsername) {
+  public AuthenticationUser createFromJiraUser(
+      JiraSearchUser jiraSearchUser, String authenticatedUsername) {
     AuthenticationUser user = new AuthenticationUser();
     MetaUtils.fillMeta(user, authenticatedUsername);
 

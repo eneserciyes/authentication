@@ -8,9 +8,10 @@ import org.apache.commons.lang.ObjectUtils;
 import tr.com.ogedik.authentication.constants.AuthenticationConstants;
 import tr.com.ogedik.commons.entity.ResourceEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /** @author orkun.gedik */
 @Entity
@@ -33,12 +34,6 @@ public class UserEntity extends ResourceEntity {
   @Column(name = AuthenticationConstants.COLS.PASSWORD)
   private String password;
 
-  @Column(name = AuthenticationConstants.COLS.GROUPS)
-  @OneToMany(
-      fetch = FetchType.EAGER,
-      cascade = {CascadeType.ALL})
-  private List<GroupEntity> groups;
-
   @Column(name = AuthenticationConstants.COLS.TEAM)
   private String team;
 
@@ -47,6 +42,9 @@ public class UserEntity extends ResourceEntity {
 
   @Column(name = AuthenticationConstants.COLS.AVATAR_URL)
   private String avatarUrl;
+
+  @Column(name = AuthenticationConstants.COLS.ADMIN)
+  private String isAdmin;
 
   @Column(name = AuthenticationConstants.COLS.LAST_LOGIN_DATE)
   private LocalDateTime localDateTime;
