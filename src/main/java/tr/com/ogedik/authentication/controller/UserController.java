@@ -9,6 +9,7 @@ import tr.com.ogedik.authentication.model.AuthenticationUser;
 import tr.com.ogedik.authentication.service.UserService;
 import tr.com.ogedik.commons.constants.Headers;
 import tr.com.ogedik.commons.constants.Services;
+import tr.com.ogedik.commons.model.JiraSearchUser;
 import tr.com.ogedik.commons.rest.AbstractController;
 import tr.com.ogedik.commons.rest.response.AbstractResponse;
 import tr.com.ogedik.commons.util.MetaUtils;
@@ -45,6 +46,14 @@ public class UserController extends AbstractController {
     MetaUtils.fillMeta(authenticationUser, authenticatedUsername);
 
     return AbstractResponse.build(userService.create(authenticationUser));
+  }
+
+  @PostMapping("/jira")
+  AbstractResponse createUserFromJiraUser(
+      @RequestBody JiraSearchUser jiraSearchUser,
+      @RequestHeader(value = Headers.AUTH_USER, defaultValue = Headers.ANONYMOUS)
+          String authenticatedUsername) {
+    return AbstractResponse.build(userService.createFromJiraUser(jiraSearchUser, authenticatedUsername));
   }
 
   @PutMapping

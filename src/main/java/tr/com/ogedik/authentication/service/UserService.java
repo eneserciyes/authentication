@@ -2,6 +2,7 @@ package tr.com.ogedik.authentication.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import tr.com.ogedik.authentication.model.AuthenticationUser;
+import tr.com.ogedik.commons.model.JiraSearchUser;
 
 import java.util.List;
 
@@ -53,4 +54,7 @@ public interface UserService extends UserDetailsService {
    * @param username {@link String} value of username
    */
   void delete(String username);
+
+  AuthenticationUser createFromJiraUser(
+      JiraSearchUser jiraSearchUser, String authenticatedUsername);
 }

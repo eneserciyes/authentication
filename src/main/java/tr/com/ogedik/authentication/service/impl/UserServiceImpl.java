@@ -1,6 +1,7 @@
 package tr.com.ogedik.authentication.service.impl;
 
 import org.apache.commons.lang.BooleanUtils;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import tr.com.ogedik.authentication.service.UserService;
 import tr.com.ogedik.authentication.util.AuthenticationUtil;
 import tr.com.ogedik.authentication.validation.user.UserValidationFacade;
 import tr.com.ogedik.commons.expection.ErrorException;
+import tr.com.ogedik.commons.model.JiraSearchUser;
 import tr.com.ogedik.commons.model.JiraUser;
+import tr.com.ogedik.commons.util.MetaUtils;
 import tr.com.ogedik.scrumier.proxy.clients.IntegrationProxy;
 
 import java.time.LocalDateTime;
@@ -63,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public AuthenticationUser create(AuthenticationUser user) {
-    validationFacade.validateCreate(user);
+    //validationFacade.validateCreate(user);
 
     JiraUser jiraUser = integrationProxy.getJiraUser(user.getUsername());
 
@@ -98,6 +101,19 @@ public class UserServiceImpl implements UserService {
     }
 
     persistenceManager.deleteByUsername(username);
+  }
+
+  @Override
+  public AuthenticationUser createFromJiraUser(JiraSearchUser jiraSearchUser, String authenticatedUsername) {
+    AuthenticationUser user = new AuthenticationUser();
+    MetaUtils.fillMeta(user, authenticatedUsername);
+
+    user.setUsername(jiraSearchUser.getName());
+    String password = AuthenticationUtil.generateRandomPassword();
+    logger.log(Level.INFO, "Password: " + password);
+    user.setPassword(password);
+    user.setEmail(jiraSearchUser.getEmailAddress());
+      return create(user);
   }
 
   @Override

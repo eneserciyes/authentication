@@ -70,9 +70,11 @@ public class AuthenticationSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(
             HttpMethod.POST,
+            Services.Path.JIRA_AUTH,
             Services.Path.AUTHENTICATE,
             Services.Path.VALIDATE,
-            Services.Path.USERS)
+            Services.Path.USERS,
+            Services.Path.USERS + "/jira")
         .permitAll()
         .and()
         .authorizeRequests()
